@@ -7,7 +7,7 @@
 
 ## Overview
 
-
+Detect cursor position and switch cursor style.
 
 ## Notes
 
