@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.1.1...v0.2.0) (2024-07-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Rename class.
+
+### Bug Fixes
+
+* Rename class. ([1503b64](https://github.com/ryohidaka/cursor-position-detector/commit/1503b64ff1fb734758d15c21d65e40435adba500))
+
 ## [0.1.1](https://github.com/ryohidaka/cursor-position-detector/compare/v0.1.0...v0.1.1) (2024-07-10)
 
 
