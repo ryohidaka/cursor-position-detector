@@ -168,10 +168,12 @@ export class CursorPositionDetector {
         this.onLeave?.(direction);
         newInZone[direction] = false;
       }
-    }
 
-    this.element.style.cursor = newCursor;
-    this.inZone = newInZone;
+      this.element.style.cursor = newCursor;
+      this.inZone = newInZone;
+    } else {
+      this.element.style.cursor = "default";
+    }
   }
 
   /**
