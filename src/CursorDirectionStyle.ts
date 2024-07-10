@@ -10,21 +10,41 @@ export class CursorDirectionStyle {
   private element: Element | null;
   // The threshold for determining the cursor's position relative to the element
   private threshold: number;
+  // Callback functions for click events
+  onClickTop?: () => void;
+  onClickBottom?: () => void;
+  onClickLeft?: () => void;
+  onClickRight?: () => void;
   // The current position of the cursor
   cursorPosition: { x: number; y: number };
 
-  constructor({ element, threshold = 0.1 }: CursorDirectionStyleProps) {
+  constructor({
+    element,
+    threshold = 0.1,
+    onClickTop,
+    onClickBottom,
+    onClickLeft,
+    onClickRight,
+  }: CursorDirectionStyleProps) {
     if (!element) {
       throw new Error("Element is required for CursorDirectionStyle.");
     }
 
     this.element = element;
     this.threshold = threshold;
+
+    // onClick callbacks
+    this.onClickTop = onClickTop;
+    this.onClickBottom = onClickBottom;
+    this.onClickLeft = onClickLeft;
+    this.onClickRight = onClickRight;
     this.cursorPosition = { x: 0, y: 0 };
 
     this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseClick = this.handleMouseClick.bind(this);
 
     this.element.addEventListener("mousemove", this.handleMouseMove);
+    this.element.addEventListener("click", this.handleMouseClick);
   }
 
   /**
@@ -40,6 +60,46 @@ export class CursorDirectionStyle {
       y: event.clientY - rect.top,
     };
     this.updateCursorStyle(rect.width, rect.height);
+  }
+
+  /**
+   * Handles the mouse click event.
+   * Calls the appropriate callback function based on the cursor's position relative to the element.
+   */
+  private handleMouseClick() {
+    if (!this.element) return;
+
+    const rect = this.element.getBoundingClientRect();
+    const boundaries = {
+      horizontal: {
+        prev: rect.width * this.threshold,
+        next: rect.width * (1 - this.threshold),
+      },
+      vertical: {
+        prev: rect.height * this.threshold,
+        next: rect.height * (1 - this.threshold),
+      },
+    };
+
+    if (this.cursorPosition.y < boundaries.vertical.prev) {
+      this.onClickTop?.();
+      return;
+    }
+
+    if (this.cursorPosition.y > boundaries.vertical.next) {
+      this.onClickBottom?.();
+      return;
+    }
+
+    if (this.cursorPosition.x < boundaries.horizontal.prev) {
+      this.onClickLeft?.();
+      return;
+    }
+
+    if (this.cursorPosition.x > boundaries.horizontal.next) {
+      this.onClickRight?.();
+      return;
+    }
   }
 
   /**
@@ -104,5 +164,6 @@ export class CursorDirectionStyle {
     if (!this.element) return;
 
     this.element.removeEventListener("mousemove", this.handleMouseMove);
+    this.element.removeEventListener("click", this.handleMouseClick);
   }
 }

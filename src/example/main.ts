@@ -9,6 +9,10 @@ const targetElement = document.querySelector("body") as Element;
 new CursorDirectionStyle({
   element: targetElement,
   threshold: 0.3,
+  onClickTop: () => console.log("Clicked top"),
+  onClickBottom: () => console.log("Clicked bottom"),
+  onClickLeft: () => console.log("Clicked left"),
+  onClickRight: () => console.log("Clicked right"),
 });
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
