@@ -10,6 +10,8 @@ export class CursorPositionDetector {
   private element: Element | null;
   // The threshold for determining the cursor's position relative to the element
   private threshold: number;
+  // The specified direction does not fire a callback
+  private disabledDirections: Direction[] = [];
   // Callback function for click events
   onClick?: (direction: Direction) => void;
   // Callback function for mouse enter events
@@ -31,6 +33,7 @@ export class CursorPositionDetector {
     onClick,
     onEnter,
     onLeave,
+    disabledDirections = [],
   }: CursorPositionDetectorProps) {
     this.element = element;
     this.threshold = threshold;
@@ -39,6 +42,7 @@ export class CursorPositionDetector {
     this.onLeave = onLeave;
     this.cursorPosition = { x: 0, y: 0 };
     this.inZone = { top: false, bottom: false, left: false, right: false };
+    this.disabledDirections = disabledDirections;
 
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseClick = this.handleMouseClick.bind(this);
@@ -98,7 +102,7 @@ export class CursorPositionDetector {
       direction = "right";
     }
 
-    if (direction) {
+    if (direction && !this.disabledDirections.includes(direction)) {
       this.onClick?.(direction);
     }
   }
@@ -156,7 +160,7 @@ export class CursorPositionDetector {
         break;
     }
 
-    if (direction) {
+    if (direction && !this.disabledDirections.includes(direction)) {
       if (!this.inZone[direction]) {
         this.onEnter?.(direction);
         newInZone[direction] = true;

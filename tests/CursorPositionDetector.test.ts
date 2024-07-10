@@ -200,6 +200,54 @@ describe("CursorPositionDetector", () => {
   });
 
   /**
+   * Disabled
+   */
+  it("should not call onClick when clicking on the top zone when disabled", () => {
+    instance = new CursorPositionDetector({
+      element,
+      threshold: 0.5,
+      disabledDirections: ["top"],
+      onClick,
+    });
+    fireEvent.click(element, { clientX: 50, clientY: 10 });
+
+    waitFor(() => {
+      expect(onClick).not.toHaveBeenCalledWith("top");
+    });
+  });
+
+  it("should not call onEnter when entering the bottom zone when disabled", () => {
+    instance = new CursorPositionDetector({
+      element,
+      threshold: 0.5,
+      disabledDirections: ["bottom"],
+      onEnter,
+    });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 90 });
+
+    waitFor(() => {
+      expect(onEnter).not.toHaveBeenCalledWith("bottom");
+    });
+  });
+
+  it("should not call onLeave when leaving the left zone when disabled", () => {
+    instance = new CursorPositionDetector({
+      element,
+      threshold: 0.5,
+      disabledDirections: ["left"],
+      onEnter,
+      onLeave,
+    });
+    fireEvent.mouseMove(element, { clientX: 10, clientY: 50 });
+    fireEvent.mouseMove(element, { clientX: 60, clientY: 50 });
+
+    waitFor(() => {
+      expect(onEnter).not.toHaveBeenCalledWith("left");
+      expect(onLeave).not.toHaveBeenCalledWith("left");
+    });
+  });
+
+  /**
    * Destroy
    */
   it("should remove event listeners on destroy", () => {

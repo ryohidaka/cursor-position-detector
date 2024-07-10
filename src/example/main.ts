@@ -9,6 +9,7 @@ const targetElement = document.querySelector("body") as Element;
 new CursorPositionDetector({
   element: targetElement,
   threshold: 0.3,
+  disabledDirections: ["bottom"],
   onClick: (direction: Direction) => console.log(`Clicked ${direction}`),
   onEnter: (direction: Direction) => console.log(`Entered ${direction} zone`),
   onLeave: (direction: Direction) => console.log(`Left ${direction} zone`),
