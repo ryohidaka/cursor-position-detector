@@ -5,7 +5,7 @@
   "exclude": ["./src/example/*", "./src/vite-env.d.ts"],
   "hideGenerator": true,
   "navigationLinks": {
-    "GitHub": "https://github.com/ryohidaka/npm-package-template",
-    "npm": "https://www.npmjs.com/package/npm-package-template"
+    "GitHub": "https://github.com/ryohidaka/cursor-position-detector",
+    "npm": "https://www.npmjs.com/package/cursor-position-detector"
   }
 }
