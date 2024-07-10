@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CursorDirectionStyle } from "../src";
+import { CursorPositionDetector } from "../src";
 import { fireEvent, waitFor } from "@testing-library/dom";
 
 describe("CursorDirectionStyle", () => {
   let element: HTMLElement;
-  let instance: CursorDirectionStyle;
+  let instance: CursorPositionDetector;
 
   beforeEach(() => {
     element = document.createElement("div");
     document.body.appendChild(element);
-    instance = new CursorDirectionStyle({ element });
+    instance = new CursorPositionDetector({ element });
   });
 
   afterEach(() => {
@@ -27,7 +27,7 @@ describe("CursorDirectionStyle", () => {
    */
   it("should call onClickTop when clicking on the top zone", () => {
     const onClickTop = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onClickTop,
@@ -41,7 +41,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onClickBottom when clicking on the bottom zone", () => {
     const onClickBottom = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onClickBottom,
@@ -55,7 +55,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onClickLeft when clicking on the left zone", () => {
     const onClickLeft = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onClickLeft,
@@ -69,7 +69,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onClickRight when clicking on the left zone", () => {
     const onClickRight = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onClickRight,
@@ -86,7 +86,7 @@ describe("CursorDirectionStyle", () => {
    */
   it("should call onEnterTop when entering the top zone", () => {
     const onEnterTop = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterTop,
@@ -100,7 +100,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onEnterBottom when entering the bottom zone", () => {
     const onEnterBottom = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterBottom,
@@ -114,7 +114,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onEnterLeft when entering the left zone", () => {
     const onEnterLeft = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterLeft,
@@ -128,7 +128,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onEnterRight when entering the right zone", () => {
     const onEnterRight = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterRight,
@@ -145,7 +145,7 @@ describe("CursorDirectionStyle", () => {
    */
   it("should call onLeaveTop when leaving the top zone", () => {
     const onLeaveTop = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterTop: () => {},
@@ -161,7 +161,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onLeaveBottom when leaving the bottom zone", () => {
     const onLeaveBottom = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterBottom: () => {},
@@ -177,7 +177,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onLeaveLeft when leaving the left zone", () => {
     const onLeaveLeft = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterLeft: () => {},
@@ -193,7 +193,7 @@ describe("CursorDirectionStyle", () => {
 
   it("should call onLeaveRight when leaving the right zone", () => {
     const onLeaveRight = vi.fn();
-    instance = new CursorDirectionStyle({
+    instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
       onEnterRight: () => {},

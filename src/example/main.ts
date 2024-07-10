@@ -2,11 +2,11 @@ import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
 import { setupCounter } from "./counter.ts";
-import { CursorDirectionStyle } from "src";
+import { CursorPositionDetector } from "src";
 
 const targetElement = document.querySelector("body") as Element;
 
-new CursorDirectionStyle({
+new CursorPositionDetector({
   element: targetElement,
   threshold: 0.3,
   onClickTop: () => console.log("Clicked top"),

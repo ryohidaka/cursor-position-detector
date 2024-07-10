@@ -1,11 +1,11 @@
-import { CursorDirectionStyleProps } from ".";
+import { CursorPositionDetectorProps } from ".";
 
 /**
- * CursorDirectionStyle
+ * CursorPositionDetector
  *
  * This class provides functionality to handle mouse events based on the cursor's position relative to an element.
  */
-export class CursorDirectionStyle {
+export class CursorPositionDetector {
   // The HTML element to which the cursor events are attached
   private element: Element | null;
   // The threshold for determining the cursor's position relative to the element
@@ -50,7 +50,7 @@ export class CursorDirectionStyle {
     onLeaveBottom,
     onLeaveLeft,
     onLeaveRight,
-  }: CursorDirectionStyleProps) {
+  }: CursorPositionDetectorProps) {
     this.element = element;
     this.threshold = threshold;
 

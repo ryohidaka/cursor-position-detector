@@ -1,4 +1,4 @@
-export type CursorDirectionStyleProps = {
+export type CursorPositionDetectorProps = {
   element: Element | null;
   threshold?: number;
   onClickTop?: () => void;

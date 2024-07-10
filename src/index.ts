@@ -1,3 +1,3 @@
-export * from "./CursorDirectionStyle";
+export * from "./CursorPositionDetector";
 
 export * from "./types";
