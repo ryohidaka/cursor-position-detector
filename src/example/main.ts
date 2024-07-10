@@ -2,17 +2,14 @@ import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
 import { setupCounter } from "./counter.ts";
-import { CursorPositionDetector } from "src";
+import { CursorPositionDetector, Direction } from "src";
 
 const targetElement = document.querySelector("body") as Element;
 
 new CursorPositionDetector({
   element: targetElement,
   threshold: 0.3,
-  onClickTop: () => console.log("Clicked top"),
-  onClickBottom: () => console.log("Clicked bottom"),
-  onClickLeft: () => console.log("Clicked left"),
-  onClickRight: () => console.log("Clicked right"),
+  onClick: (direction: Direction) => console.log(`Clicked ${direction}`),
   onEnterTop: () => console.log("Entered top zone"),
   onEnterBottom: () => console.log("Entered bottom zone"),
   onEnterLeft: () => console.log("Entered left zone"),

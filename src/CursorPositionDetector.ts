@@ -1,4 +1,4 @@
-import { CursorPositionDetectorProps } from ".";
+import { CursorPositionDetectorProps, Direction } from ".";
 
 /**
  * CursorPositionDetector
@@ -10,11 +10,8 @@ export class CursorPositionDetector {
   private element: Element | null;
   // The threshold for determining the cursor's position relative to the element
   private threshold: number;
-  // Callback functions for click events
-  onClickTop?: () => void;
-  onClickBottom?: () => void;
-  onClickLeft?: () => void;
-  onClickRight?: () => void;
+  // Callback function for click events
+  onClick?: (direction: Direction) => void;
   // Callback functions for mouse enter events
   onEnterTop?: () => void;
   onEnterBottom?: () => void;
@@ -38,10 +35,7 @@ export class CursorPositionDetector {
   constructor({
     element,
     threshold = 0.1,
-    onClickTop,
-    onClickBottom,
-    onClickLeft,
-    onClickRight,
+    onClick,
     onEnterTop,
     onEnterBottom,
     onEnterLeft,
@@ -53,12 +47,7 @@ export class CursorPositionDetector {
   }: CursorPositionDetectorProps) {
     this.element = element;
     this.threshold = threshold;
-
-    // onClick callbacks
-    this.onClickTop = onClickTop;
-    this.onClickBottom = onClickBottom;
-    this.onClickLeft = onClickLeft;
-    this.onClickRight = onClickRight;
+    this.onClick = onClick;
 
     // onEnter callbacks
     this.onEnterTop = onEnterTop;
@@ -121,31 +110,23 @@ export class CursorPositionDetector {
       },
     };
 
+    let direction: Direction | null = null;
+
     if (this.cursorPosition.y < boundaries.vertical.prev) {
-      this.onClickTop?.();
-      return;
+      direction = "top";
+    } else if (this.cursorPosition.y > boundaries.vertical.next) {
+      direction = "bottom";
+    } else if (this.cursorPosition.x < boundaries.horizontal.prev) {
+      direction = "left";
+    } else if (this.cursorPosition.x > boundaries.horizontal.next) {
+      direction = "right";
     }
 
-    if (this.cursorPosition.y > boundaries.vertical.next) {
-      this.onClickBottom?.();
-      return;
-    }
-
-    if (this.cursorPosition.x < boundaries.horizontal.prev) {
-      this.onClickLeft?.();
-      return;
-    }
-
-    if (this.cursorPosition.x > boundaries.horizontal.next) {
-      this.onClickRight?.();
-      return;
+    if (direction) {
+      this.onClick?.(direction);
     }
   }
 
-  /**
-   * Updates the cursor style based on its position relative to the element.
-   * Calls the appropriate callback functions for mouse enter and leave events.
-   */
   private updateCursorStyle(width: number, height: number) {
     if (!this.element || !(this.element instanceof HTMLElement)) return;
 

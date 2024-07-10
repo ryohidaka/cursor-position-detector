@@ -20,15 +20,14 @@ npm install cursor-position-detector
 ## Usage
 
 ```ts
+import { CursorPositionDetector, Direction } from "cursor-position-detector";
+
 const targetElement = document.querySelector("body") as Element;
 
 new CursorDirectionStyle({
   element: targetElement,
   threshold: 0.3,
-  onClickTop: () => console.log("Clicked top"),
-  onClickBottom: () => console.log("Clicked bottom"),
-  onClickLeft: () => console.log("Clicked left"),
-  onClickRight: () => console.log("Clicked right"),
+  onClick: (direction: Direction) => console.log(`Clicked ${direction}`),
   onEnterTop: () => console.log("Entered top zone"),
   onEnterBottom: () => console.log("Entered bottom zone"),
   onEnterLeft: () => console.log("Entered left zone"),

@@ -1,10 +1,7 @@
 export type CursorPositionDetectorProps = {
   element: Element | null;
   threshold?: number;
-  onClickTop?: () => void;
-  onClickBottom?: () => void;
-  onClickLeft?: () => void;
-  onClickRight?: () => void;
+  onClick?: (direction: Direction) => void;
   onEnterTop?: () => void;
   onEnterBottom?: () => void;
   onEnterLeft?: () => void;
@@ -26,3 +23,5 @@ export type InZone = {
   left: boolean;
   right: boolean;
 };
+
+export type Direction = "top" | "bottom" | "left" | "right";

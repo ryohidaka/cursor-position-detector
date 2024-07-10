@@ -6,6 +6,8 @@ describe("CursorDirectionStyle", () => {
   let element: HTMLElement;
   let instance: CursorPositionDetector;
 
+  const onClick = vi.fn();
+
   beforeEach(() => {
     element = document.createElement("div");
     document.body.appendChild(element);
@@ -25,59 +27,55 @@ describe("CursorDirectionStyle", () => {
   /**
    * onClick
    */
-  it("should call onClickTop when clicking on the top zone", () => {
-    const onClickTop = vi.fn();
+  it("should call onClick when clicking on the top zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onClickTop,
+      onClick,
     });
     fireEvent.click(element, { clientX: 50, clientY: 10 });
 
     waitFor(() => {
-      expect(onClickTop).toHaveBeenCalled();
+      expect(onClick).toHaveBeenCalledWith("top");
     });
   });
 
-  it("should call onClickBottom when clicking on the bottom zone", () => {
-    const onClickBottom = vi.fn();
+  it("should call onClick when clicking on the bottom zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onClickBottom,
+      onClick,
     });
     fireEvent.click(element, { clientX: 50, clientY: 90 });
 
     waitFor(() => {
-      expect(onClickBottom).toHaveBeenCalled();
+      expect(onClick).toHaveBeenCalledWith("bottom");
     });
   });
 
-  it("should call onClickLeft when clicking on the left zone", () => {
-    const onClickLeft = vi.fn();
+  it("should call onClick when clicking on the left zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onClickLeft,
+      onClick,
     });
     fireEvent.click(element, { clientX: 10, clientY: 50 });
 
     waitFor(() => {
-      expect(onClickLeft).toHaveBeenCalled();
+      expect(onClick).toHaveBeenCalledWith("left");
     });
   });
 
-  it("should call onClickRight when clicking on the left zone", () => {
-    const onClickRight = vi.fn();
+  it("should call onClick when clicking on the right zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onClickRight,
+      onClick,
     });
     fireEvent.click(element, { clientX: 90, clientY: 50 });
 
     waitFor(() => {
-      expect(onClickRight).toHaveBeenCalled();
+      expect(onClick).toHaveBeenCalledWith("right");
     });
   });
 
