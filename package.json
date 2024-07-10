@@ -1,6 +1,6 @@
 {
   "name": "cursor-position-detector",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Detect cursor position and switch cursor style.",
   "keywords": [
     "DOM",

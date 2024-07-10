@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.3.0...v0.4.0) (2024-07-10)
+
+
+### Features
+
+* Add disabledDirections. ([b67fdb8](https://github.com/ryohidaka/cursor-position-detector/commit/b67fdb8b0f6013a20b845a55fff398f480a16a34))
+
 ## [0.3.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.2.0...v0.3.0) (2024-07-10)
 
 
