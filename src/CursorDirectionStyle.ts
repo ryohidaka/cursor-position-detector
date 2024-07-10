@@ -20,6 +20,11 @@ export class CursorDirectionStyle {
   onEnterBottom?: () => void;
   onEnterLeft?: () => void;
   onEnterRight?: () => void;
+  // Callback functions for mouse leave events
+  onLeaveTop?: () => void;
+  onLeaveBottom?: () => void;
+  onLeaveLeft?: () => void;
+  onLeaveRight?: () => void;
   // The current position of the cursor
   cursorPosition: { x: number; y: number };
   // Flags indicating whether the cursor is in a specific zone
@@ -41,6 +46,10 @@ export class CursorDirectionStyle {
     onEnterBottom,
     onEnterLeft,
     onEnterRight,
+    onLeaveTop,
+    onLeaveBottom,
+    onLeaveLeft,
+    onLeaveRight,
   }: CursorDirectionStyleProps) {
     if (!element) {
       throw new Error("Element is required for CursorDirectionStyle.");
@@ -60,6 +69,12 @@ export class CursorDirectionStyle {
     this.onEnterBottom = onEnterBottom;
     this.onEnterLeft = onEnterLeft;
     this.onEnterRight = onEnterRight;
+
+    // onLeave callbacks
+    this.onLeaveTop = onLeaveTop;
+    this.onLeaveBottom = onLeaveBottom;
+    this.onLeaveLeft = onLeaveLeft;
+    this.onLeaveRight = onLeaveRight;
 
     this.cursorPosition = { x: 0, y: 0 };
     this.inZone = { top: false, bottom: false, left: false, right: false };
@@ -168,6 +183,9 @@ export class CursorDirectionStyle {
         if (!this.inZone.top) {
           this.onEnterTop?.();
           newInZone.top = true;
+        } else {
+          this.onLeaveTop?.();
+          newInZone.top = false;
         }
         break;
       case distBottom:
@@ -175,6 +193,9 @@ export class CursorDirectionStyle {
         if (!this.inZone.bottom) {
           this.onEnterBottom?.();
           newInZone.bottom = true;
+        } else {
+          this.onLeaveBottom?.();
+          newInZone.bottom = false;
         }
         break;
       case distLeft:
@@ -182,6 +203,9 @@ export class CursorDirectionStyle {
         if (!this.inZone.left) {
           this.onEnterLeft?.();
           newInZone.left = true;
+        } else {
+          this.onLeaveLeft?.();
+          newInZone.left = false;
         }
         break;
       case distRight:
@@ -189,9 +213,28 @@ export class CursorDirectionStyle {
         if (!this.inZone.right) {
           this.onEnterRight?.();
           newInZone.right = true;
+        } else {
+          this.onLeaveRight?.();
+          newInZone.right = false;
         }
         break;
       default:
+        if (this.inZone.top) {
+          this.onLeaveTop?.();
+          newInZone.top = false;
+        }
+        if (this.inZone.bottom) {
+          this.onLeaveBottom?.();
+          newInZone.bottom = false;
+        }
+        if (this.inZone.left) {
+          this.onLeaveLeft?.();
+          newInZone.left = false;
+        }
+        if (this.inZone.right) {
+          this.onLeaveRight?.();
+          newInZone.right = false;
+        }
         break;
     }
 

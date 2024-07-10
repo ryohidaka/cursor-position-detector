@@ -9,6 +9,10 @@ export type CursorDirectionStyleProps = {
   onEnterBottom?: () => void;
   onEnterLeft?: () => void;
   onEnterRight?: () => void;
+  onLeaveTop?: () => void;
+  onLeaveBottom?: () => void;
+  onLeaveLeft?: () => void;
+  onLeaveRight?: () => void;
 };
 
 export type CursorPosition = {

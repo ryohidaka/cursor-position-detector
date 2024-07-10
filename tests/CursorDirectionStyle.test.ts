@@ -141,6 +141,73 @@ describe("CursorDirectionStyle", () => {
   });
 
   /**
+   * onLeave
+   */
+  it("should call onLeaveTop when leaving the top zone", () => {
+    const onLeaveTop = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterTop: () => {},
+      onLeaveTop,
+    });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 10 });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 60 });
+
+    waitFor(() => {
+      expect(onLeaveTop).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onLeaveBottom when leaving the bottom zone", () => {
+    const onLeaveBottom = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterBottom: () => {},
+      onLeaveBottom,
+    });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 90 });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 60 });
+
+    waitFor(() => {
+      expect(onLeaveBottom).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onLeaveLeft when leaving the left zone", () => {
+    const onLeaveLeft = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterLeft: () => {},
+      onLeaveLeft,
+    });
+    fireEvent.mouseMove(element, { clientX: 10, clientY: 50 });
+    fireEvent.mouseMove(element, { clientX: 60, clientY: 50 });
+
+    waitFor(() => {
+      expect(onLeaveLeft).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onLeaveRight when leaving the right zone", () => {
+    const onLeaveRight = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterRight: () => {},
+      onLeaveRight,
+    });
+    fireEvent.mouseMove(element, { clientX: 90, clientY: 50 });
+    fireEvent.mouseMove(element, { clientX: 60, clientY: 50 });
+
+    waitFor(() => {
+      expect(onLeaveRight).toHaveBeenCalled();
+    });
+  });
+
+  /**
    * Destroy
    */
   it("should remove event listeners on destroy", () => {

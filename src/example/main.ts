@@ -17,6 +17,10 @@ new CursorDirectionStyle({
   onEnterBottom: () => console.log("Entered bottom zone"),
   onEnterLeft: () => console.log("Entered left zone"),
   onEnterRight: () => console.log("Entered right zone"),
+  onLeaveTop: () => console.log("Left top zone"),
+  onLeaveBottom: () => console.log("Left bottom zone"),
+  onLeaveLeft: () => console.log("Left left zone"),
+  onLeaveRight: () => console.log("Left right zone"),
 });
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
