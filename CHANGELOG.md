@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ryohidaka/cursor-position-detector/compare/v0.1.0...v0.1.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* Change element to nullable. ([5947be2](https://github.com/ryohidaka/cursor-position-detector/commit/5947be285b774407530b3362ca83fe6fe2eb6f27))
+
 ## 0.1.0 (2024-07-10)
 
 
