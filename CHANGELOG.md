@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/ryohidaka/cursor-position-detector/compare/v0.4.0...v0.4.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* Fixed an issue with the cursor style switching when set to disabled. ([ff68024](https://github.com/ryohidaka/cursor-position-detector/commit/ff680242bcbed5ed40ddba88760c07998db3e5b6))
+
 ## [0.4.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.3.0...v0.4.0) (2024-07-10)
 
 
