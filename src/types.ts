@@ -1,5 +1,5 @@
 export type CursorDirectionStyleProps = {
-  element: Element;
+  element: Element | null;
   threshold?: number;
   onClickTop?: () => void;
   onClickBottom?: () => void;

@@ -51,10 +51,6 @@ export class CursorDirectionStyle {
     onLeaveLeft,
     onLeaveRight,
   }: CursorDirectionStyleProps) {
-    if (!element) {
-      throw new Error("Element is required for CursorDirectionStyle.");
-    }
-
     this.element = element;
     this.threshold = threshold;
 
@@ -81,6 +77,11 @@ export class CursorDirectionStyle {
 
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseClick = this.handleMouseClick.bind(this);
+
+    if (!this.element) {
+      console.error("Element is required for CursorDirectionStyle.");
+      return;
+    }
 
     this.element.addEventListener("mousemove", this.handleMouseMove);
     this.element.addEventListener("click", this.handleMouseClick);
