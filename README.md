@@ -9,8 +9,6 @@
 
 Detect cursor position and switch cursor style.
 
-## Notes
-
 ## Installation
 
 You can install this library using npm:
@@ -21,7 +19,26 @@ npm install cursor-position-detector
 
 ## Usage
 
-## Link
+```ts
+const targetElement = document.querySelector("body") as Element;
+
+new CursorDirectionStyle({
+  element: targetElement,
+  threshold: 0.3,
+  onClickTop: () => console.log("Clicked top"),
+  onClickBottom: () => console.log("Clicked bottom"),
+  onClickLeft: () => console.log("Clicked left"),
+  onClickRight: () => console.log("Clicked right"),
+  onEnterTop: () => console.log("Entered top zone"),
+  onEnterBottom: () => console.log("Entered bottom zone"),
+  onEnterLeft: () => console.log("Entered left zone"),
+  onEnterRight: () => console.log("Entered right zone"),
+  onLeaveTop: () => console.log("Left top zone"),
+  onLeaveBottom: () => console.log("Left bottom zone"),
+  onLeaveLeft: () => console.log("Left left zone"),
+  onLeaveRight: () => console.log("Left right zone"),
+});
+```
 
 ## License
 
