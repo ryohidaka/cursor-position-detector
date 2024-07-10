@@ -2,6 +2,14 @@ import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
 import { setupCounter } from "./counter.ts";
+import { CursorDirectionStyle } from "src";
+
+const targetElement = document.querySelector("body") as Element;
+
+new CursorDirectionStyle({
+  element: targetElement,
+  threshold: 0.3,
+});
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
