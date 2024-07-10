@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.2.0...v0.3.0) (2024-07-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Integrated onEnter and onLeave events.
+* Integrated callbacks for onClick events.
+
+### Features
+
+* Integrated callbacks for onClick events. ([b695ce9](https://github.com/ryohidaka/cursor-position-detector/commit/b695ce9178f2d2177daf6a614fb4bf94c5ab6c10))
+* Integrated onEnter and onLeave events. ([b6819a3](https://github.com/ryohidaka/cursor-position-detector/commit/b6819a320924a05433361430eb36a7630cbf4328))
+
+
+### Bug Fixes
+
+* Rename class. ([fed899d](https://github.com/ryohidaka/cursor-position-detector/commit/fed899d40165e6fd09d5192779d8be9e3c1375de))
+
 ## [0.2.0](https://github.com/ryohidaka/cursor-position-detector/compare/v0.1.1...v0.2.0) (2024-07-10)
 
 
