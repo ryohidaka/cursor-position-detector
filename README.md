@@ -24,7 +24,7 @@ import { CursorPositionDetector, Direction } from "cursor-position-detector";
 
 const targetElement = document.querySelector("body") as Element;
 
-new CursorDirectionStyle({
+new CursorPositionDetector({
   element: targetElement,
   threshold: 0.3,
   onClick: (direction: Direction) => console.log(`Clicked ${direction}`),

@@ -44,7 +44,7 @@ export class CursorPositionDetector {
     this.handleMouseClick = this.handleMouseClick.bind(this);
 
     if (!this.element) {
-      console.error("Element is required for CursorDirectionStyle.");
+      console.error("Element is required for CursorPositionDetector.");
       return;
     }
 

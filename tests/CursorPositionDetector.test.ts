@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CursorPositionDetector } from "../src";
 import { fireEvent, waitFor } from "@testing-library/dom";
 
-describe("CursorDirectionStyle", () => {
+describe("CursorPositionDetector", () => {
   let element: HTMLElement;
   let instance: CursorPositionDetector;
 
