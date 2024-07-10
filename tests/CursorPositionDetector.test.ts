@@ -7,6 +7,8 @@ describe("CursorDirectionStyle", () => {
   let instance: CursorPositionDetector;
 
   const onClick = vi.fn();
+  const onEnter = vi.fn();
+  const onLeave = vi.fn();
 
   beforeEach(() => {
     element = document.createElement("div");
@@ -82,126 +84,118 @@ describe("CursorDirectionStyle", () => {
   /**
    * onEnter
    */
-  it("should call onEnterTop when entering the top zone", () => {
-    const onEnterTop = vi.fn();
+  it("should call onEnter when entering the top zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterTop,
+      onEnter,
     });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 10 });
 
     waitFor(() => {
-      expect(onEnterTop).toHaveBeenCalled();
+      expect(onEnter).toHaveBeenCalledWith("top");
     });
   });
 
-  it("should call onEnterBottom when entering the bottom zone", () => {
-    const onEnterBottom = vi.fn();
+  it("should call onEnter when entering the bottom zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterBottom,
+      onEnter,
     });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 90 });
 
     waitFor(() => {
-      expect(onEnterBottom).toHaveBeenCalled();
+      expect(onEnter).toHaveBeenCalledWith("bottom");
     });
   });
 
-  it("should call onEnterLeft when entering the left zone", () => {
-    const onEnterLeft = vi.fn();
+  it("should call onEnter when entering the left zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterLeft,
+      onEnter,
     });
     fireEvent.mouseMove(element, { clientX: 10, clientY: 50 });
 
     waitFor(() => {
-      expect(onEnterLeft).toHaveBeenCalled();
+      expect(onEnter).toHaveBeenCalledWith("left");
     });
   });
 
-  it("should call onEnterRight when entering the right zone", () => {
-    const onEnterRight = vi.fn();
+  it("should call onEnter when entering the right zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterRight,
+      onEnter,
     });
     fireEvent.mouseMove(element, { clientX: 90, clientY: 50 });
 
     waitFor(() => {
-      expect(onEnterRight).toHaveBeenCalled();
+      expect(onEnter).toHaveBeenCalledWith("right");
     });
   });
 
   /**
    * onLeave
    */
-  it("should call onLeaveTop when leaving the top zone", () => {
-    const onLeaveTop = vi.fn();
+  it("should call onLeave when leaving the top zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterTop: () => {},
-      onLeaveTop,
+      onEnter,
+      onLeave,
     });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 10 });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 60 });
 
     waitFor(() => {
-      expect(onLeaveTop).toHaveBeenCalled();
+      expect(onLeave).toHaveBeenCalledWith("top");
     });
   });
 
-  it("should call onLeaveBottom when leaving the bottom zone", () => {
-    const onLeaveBottom = vi.fn();
+  it("should call onLeave when leaving the bottom zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterBottom: () => {},
-      onLeaveBottom,
+      onEnter,
+      onLeave,
     });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 90 });
     fireEvent.mouseMove(element, { clientX: 50, clientY: 60 });
 
     waitFor(() => {
-      expect(onLeaveBottom).toHaveBeenCalled();
+      expect(onLeave).toHaveBeenCalledWith("bottom");
     });
   });
 
-  it("should call onLeaveLeft when leaving the left zone", () => {
-    const onLeaveLeft = vi.fn();
+  it("should call onLeave when leaving the left zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterLeft: () => {},
-      onLeaveLeft,
+      onEnter,
+      onLeave,
     });
     fireEvent.mouseMove(element, { clientX: 10, clientY: 50 });
     fireEvent.mouseMove(element, { clientX: 60, clientY: 50 });
 
     waitFor(() => {
-      expect(onLeaveLeft).toHaveBeenCalled();
+      expect(onLeave).toHaveBeenCalledWith("left");
     });
   });
 
-  it("should call onLeaveRight when leaving the right zone", () => {
-    const onLeaveRight = vi.fn();
+  it("should call onLeave when leaving the right zone", () => {
     instance = new CursorPositionDetector({
       element,
       threshold: 0.5,
-      onEnterRight: () => {},
-      onLeaveRight,
+      onEnter,
+      onLeave,
     });
     fireEvent.mouseMove(element, { clientX: 90, clientY: 50 });
     fireEvent.mouseMove(element, { clientX: 60, clientY: 50 });
 
     waitFor(() => {
-      expect(onLeaveRight).toHaveBeenCalled();
+      expect(onLeave).toHaveBeenCalledWith("right");
     });
   });
 

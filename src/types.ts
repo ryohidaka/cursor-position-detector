@@ -2,14 +2,8 @@ export type CursorPositionDetectorProps = {
   element: Element | null;
   threshold?: number;
   onClick?: (direction: Direction) => void;
-  onEnterTop?: () => void;
-  onEnterBottom?: () => void;
-  onEnterLeft?: () => void;
-  onEnterRight?: () => void;
-  onLeaveTop?: () => void;
-  onLeaveBottom?: () => void;
-  onLeaveLeft?: () => void;
-  onLeaveRight?: () => void;
+  onEnter?: (direction: Direction) => void;
+  onLeave?: (direction: Direction) => void;
 };
 
 export type CursorPosition = {

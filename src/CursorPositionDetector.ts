@@ -12,17 +12,10 @@ export class CursorPositionDetector {
   private threshold: number;
   // Callback function for click events
   onClick?: (direction: Direction) => void;
-  // Callback functions for mouse enter events
-  onEnterTop?: () => void;
-  onEnterBottom?: () => void;
-  onEnterLeft?: () => void;
-  onEnterRight?: () => void;
-  // Callback functions for mouse leave events
-  onLeaveTop?: () => void;
-  onLeaveBottom?: () => void;
-  onLeaveLeft?: () => void;
-  onLeaveRight?: () => void;
-  // The current position of the cursor
+  // Callback function for mouse enter events
+  onEnter?: (direction: Direction) => void;
+  // Callback function for mouse leave events
+  onLeave?: (direction: Direction) => void;
   cursorPosition: { x: number; y: number };
   // Flags indicating whether the cursor is in a specific zone
   private inZone: {
@@ -36,31 +29,14 @@ export class CursorPositionDetector {
     element,
     threshold = 0.1,
     onClick,
-    onEnterTop,
-    onEnterBottom,
-    onEnterLeft,
-    onEnterRight,
-    onLeaveTop,
-    onLeaveBottom,
-    onLeaveLeft,
-    onLeaveRight,
+    onEnter,
+    onLeave,
   }: CursorPositionDetectorProps) {
     this.element = element;
     this.threshold = threshold;
     this.onClick = onClick;
-
-    // onEnter callbacks
-    this.onEnterTop = onEnterTop;
-    this.onEnterBottom = onEnterBottom;
-    this.onEnterLeft = onEnterLeft;
-    this.onEnterRight = onEnterRight;
-
-    // onLeave callbacks
-    this.onLeaveTop = onLeaveTop;
-    this.onLeaveBottom = onLeaveBottom;
-    this.onLeaveLeft = onLeaveLeft;
-    this.onLeaveRight = onLeaveRight;
-
+    this.onEnter = onEnter;
+    this.onLeave = onLeave;
     this.cursorPosition = { x: 0, y: 0 };
     this.inZone = { top: false, bottom: false, left: false, right: false };
 
@@ -159,65 +135,35 @@ export class CursorPositionDetector {
 
     const minDist = Math.min(distTop, distBottom, distLeft, distRight);
 
+    let direction: Direction | null = null;
+
     switch (minDist) {
       case distTop:
         newCursor = cursors.top;
-        if (!this.inZone.top) {
-          this.onEnterTop?.();
-          newInZone.top = true;
-        } else {
-          this.onLeaveTop?.();
-          newInZone.top = false;
-        }
+        direction = "top";
         break;
       case distBottom:
         newCursor = cursors.bottom;
-        if (!this.inZone.bottom) {
-          this.onEnterBottom?.();
-          newInZone.bottom = true;
-        } else {
-          this.onLeaveBottom?.();
-          newInZone.bottom = false;
-        }
+        direction = "bottom";
         break;
       case distLeft:
         newCursor = cursors.left;
-        if (!this.inZone.left) {
-          this.onEnterLeft?.();
-          newInZone.left = true;
-        } else {
-          this.onLeaveLeft?.();
-          newInZone.left = false;
-        }
+        direction = "left";
         break;
       case distRight:
         newCursor = cursors.right;
-        if (!this.inZone.right) {
-          this.onEnterRight?.();
-          newInZone.right = true;
-        } else {
-          this.onLeaveRight?.();
-          newInZone.right = false;
-        }
+        direction = "right";
         break;
-      default:
-        if (this.inZone.top) {
-          this.onLeaveTop?.();
-          newInZone.top = false;
-        }
-        if (this.inZone.bottom) {
-          this.onLeaveBottom?.();
-          newInZone.bottom = false;
-        }
-        if (this.inZone.left) {
-          this.onLeaveLeft?.();
-          newInZone.left = false;
-        }
-        if (this.inZone.right) {
-          this.onLeaveRight?.();
-          newInZone.right = false;
-        }
-        break;
+    }
+
+    if (direction) {
+      if (!this.inZone[direction]) {
+        this.onEnter?.(direction);
+        newInZone[direction] = true;
+      } else {
+        this.onLeave?.(direction);
+        newInZone[direction] = false;
+      }
     }
 
     this.element.style.cursor = newCursor;

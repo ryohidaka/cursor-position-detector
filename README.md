@@ -28,14 +28,8 @@ new CursorDirectionStyle({
   element: targetElement,
   threshold: 0.3,
   onClick: (direction: Direction) => console.log(`Clicked ${direction}`),
-  onEnterTop: () => console.log("Entered top zone"),
-  onEnterBottom: () => console.log("Entered bottom zone"),
-  onEnterLeft: () => console.log("Entered left zone"),
-  onEnterRight: () => console.log("Entered right zone"),
-  onLeaveTop: () => console.log("Left top zone"),
-  onLeaveBottom: () => console.log("Left bottom zone"),
-  onLeaveLeft: () => console.log("Left left zone"),
-  onLeaveRight: () => console.log("Left right zone"),
+  onEnter: (direction: Direction) => console.log(`Entered ${direction} zone`),
+  onLeave: (direction: Direction) => console.log(`Left ${direction} zone`),
 });
 ```
 
