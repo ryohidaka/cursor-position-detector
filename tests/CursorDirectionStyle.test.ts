@@ -82,6 +82,65 @@ describe("CursorDirectionStyle", () => {
   });
 
   /**
+   * onEnter
+   */
+  it("should call onEnterTop when entering the top zone", () => {
+    const onEnterTop = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterTop,
+    });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 10 });
+
+    waitFor(() => {
+      expect(onEnterTop).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onEnterBottom when entering the bottom zone", () => {
+    const onEnterBottom = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterBottom,
+    });
+    fireEvent.mouseMove(element, { clientX: 50, clientY: 90 });
+
+    waitFor(() => {
+      expect(onEnterBottom).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onEnterLeft when entering the left zone", () => {
+    const onEnterLeft = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterLeft,
+    });
+    fireEvent.mouseMove(element, { clientX: 10, clientY: 50 });
+
+    waitFor(() => {
+      expect(onEnterLeft).toHaveBeenCalled();
+    });
+  });
+
+  it("should call onEnterRight when entering the right zone", () => {
+    const onEnterRight = vi.fn();
+    instance = new CursorDirectionStyle({
+      element,
+      threshold: 0.5,
+      onEnterRight,
+    });
+    fireEvent.mouseMove(element, { clientX: 90, clientY: 50 });
+
+    waitFor(() => {
+      expect(onEnterRight).toHaveBeenCalled();
+    });
+  });
+
+  /**
    * Destroy
    */
   it("should remove event listeners on destroy", () => {

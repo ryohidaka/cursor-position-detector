@@ -13,6 +13,10 @@ new CursorDirectionStyle({
   onClickBottom: () => console.log("Clicked bottom"),
   onClickLeft: () => console.log("Clicked left"),
   onClickRight: () => console.log("Clicked right"),
+  onEnterTop: () => console.log("Entered top zone"),
+  onEnterBottom: () => console.log("Entered bottom zone"),
+  onEnterLeft: () => console.log("Entered left zone"),
+  onEnterRight: () => console.log("Entered right zone"),
 });
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `

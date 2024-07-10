@@ -15,8 +15,20 @@ export class CursorDirectionStyle {
   onClickBottom?: () => void;
   onClickLeft?: () => void;
   onClickRight?: () => void;
+  // Callback functions for mouse enter events
+  onEnterTop?: () => void;
+  onEnterBottom?: () => void;
+  onEnterLeft?: () => void;
+  onEnterRight?: () => void;
   // The current position of the cursor
   cursorPosition: { x: number; y: number };
+  // Flags indicating whether the cursor is in a specific zone
+  private inZone: {
+    top: boolean;
+    bottom: boolean;
+    left: boolean;
+    right: boolean;
+  };
 
   constructor({
     element,
@@ -25,6 +37,10 @@ export class CursorDirectionStyle {
     onClickBottom,
     onClickLeft,
     onClickRight,
+    onEnterTop,
+    onEnterBottom,
+    onEnterLeft,
+    onEnterRight,
   }: CursorDirectionStyleProps) {
     if (!element) {
       throw new Error("Element is required for CursorDirectionStyle.");
@@ -38,7 +54,15 @@ export class CursorDirectionStyle {
     this.onClickBottom = onClickBottom;
     this.onClickLeft = onClickLeft;
     this.onClickRight = onClickRight;
+
+    // onEnter callbacks
+    this.onEnterTop = onEnterTop;
+    this.onEnterBottom = onEnterBottom;
+    this.onEnterLeft = onEnterLeft;
+    this.onEnterRight = onEnterRight;
+
     this.cursorPosition = { x: 0, y: 0 };
+    this.inZone = { top: false, bottom: false, left: false, right: false };
 
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseClick = this.handleMouseClick.bind(this);
@@ -129,6 +153,7 @@ export class CursorDirectionStyle {
     };
 
     let newCursor = cursors.default;
+    let newInZone = { ...this.inZone };
 
     const distTop = this.cursorPosition.y - boundaries.vertical.prev;
     const distBottom = boundaries.vertical.next - this.cursorPosition.y;
@@ -140,21 +165,38 @@ export class CursorDirectionStyle {
     switch (minDist) {
       case distTop:
         newCursor = cursors.top;
+        if (!this.inZone.top) {
+          this.onEnterTop?.();
+          newInZone.top = true;
+        }
         break;
       case distBottom:
         newCursor = cursors.bottom;
+        if (!this.inZone.bottom) {
+          this.onEnterBottom?.();
+          newInZone.bottom = true;
+        }
         break;
       case distLeft:
         newCursor = cursors.left;
+        if (!this.inZone.left) {
+          this.onEnterLeft?.();
+          newInZone.left = true;
+        }
         break;
       case distRight:
         newCursor = cursors.right;
+        if (!this.inZone.right) {
+          this.onEnterRight?.();
+          newInZone.right = true;
+        }
         break;
       default:
         break;
     }
 
     this.element.style.cursor = newCursor;
+    this.inZone = newInZone;
   }
 
   /**
