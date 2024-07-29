@@ -42,8 +42,8 @@
   "homepage": "https://github.com/ryohidaka/cursor-position-detector#readme",
   "devDependencies": {
     "@testing-library/dom": "^10.3.1",
-    "@types/node": "^20.14.10",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.0.4",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-n": "^17.9.0",
@@ -52,6 +52,6 @@
     "vite": "^5.3.3",
     "vite-plugin-dts": "^3.9.1",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.4.0"
+    "vitest": "^2.0.4"
   }
 }
